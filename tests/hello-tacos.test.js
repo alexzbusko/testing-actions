@@ -15,9 +15,13 @@ describe("JavaScript tests for Hello Tacos contract", () => {
 
   beforeAll(async () => {
     Tezos = new TezosToolkit(rpcUrl);
-    signer = new InMemorySigner(alice.keys.secretKey.replace(/unencrypted:/, ''));
+    console.log(alice)
+    console.log(alice.secretKey)
+    signer = new InMemorySigner(alice.secretKey.replace(/unencrypted:/, ''));
     Tezos.setSignerProvider(signer);
-    const op = await Tezos.contract.transfer({ to: bob.keys.publicKey, amount: 1 });
+    console.log(bob)
+    console.log(bob.publicKeyHash)
+    const op = await Tezos.contract.transfer({ to: bob.publicKeyHash, amount: 1 });
     await op.confirmation();
   });
 
